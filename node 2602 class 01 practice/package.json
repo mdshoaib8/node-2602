@@ -1,0 +1,14 @@
+{
+  "name": "node-2602-class-01",
+  "version": "1.0.0",
+  "description": "node-2602-class-01",
+  "license": "ISC",
+  "author": "Mohammad Shoaib",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "node index.js"
+  }
+}
