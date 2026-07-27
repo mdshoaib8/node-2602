@@ -1,30 +1,35 @@
-// Import EventEmitter class from events module
 const EventEmitter = require('events');
 
-// Create an instance of EventEmitter
 const event = new EventEmitter();
 
-// Register event listeners for the "trigger" event
-event.once("trigger", () => {
-    console.log("✅ Task - 1 is completed.");
-})
+const user = {
+    name: "Sunflower",
+    email: "sunflower@you.com",
+    password: "12345"
+};
 
-event.on("trigger", () => {
-    console.log("✅ Task - 2 is completed.");
-})
+const userInput = {
+    email: "sunflower@you.com",
+    password: "123456"
+};
 
-event.on("trigger", () => {
-    console.log("✅ Task - 3 is completed.");
-})
+function userInfo({ email, password }) {
+    (email === user.email && password === user.password)
+        ? console.log(`\n🟢 Login successful. Welcome back! ${user.name} 🌻.\n`)
+        : console.log('\n🔴 Login failed: incorrect email or password.\n');
+}
 
-event.on("trigger", () => {
-    console.log("✅ Task - 4 is completed.");
-})
+function alert({ email, password }) {
+    (email !== user.email || password !== user.password)
+        ? console.log('\n❌ Authentication error: please check your credentials and try again.\n')
+        : console.log('\n🍡 You are already logged in.\n');
+}
 
-event.on("trigger", (check) => {
-    console.log(check);
-})
+event.once("login", userInfo);
+event.on("login", alert);
 
-// Emit the "trigger" event multiple times
-event.emit("trigger", "\n🔴 Check 'Task - 2, 3, & 4' one more time.\n");
-event.emit("trigger", "\n🟢 Everything is working fine, no issues found.\n");
+event.emit("login", userInput);
+event.emit("login", userInput);
+event.emit("login", userInput);
+event.emit("login", userInput);
+event.emit("login", userInput);
