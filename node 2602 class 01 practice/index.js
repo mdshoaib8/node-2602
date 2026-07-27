@@ -10,7 +10,7 @@ const user = {
 
 const userInput = {
     email: "sunflower@you.com",
-    password: "123456"
+    password: "12345"
 };
 
 function userInfo({ email, password }) {
@@ -22,7 +22,7 @@ function userInfo({ email, password }) {
 function alert({ email, password }) {
     (email !== user.email || password !== user.password)
         ? console.log('\n❌ Authentication error: please check your credentials and try again.\n')
-        : console.log('\n🍡 You are already logged in.\n');
+        : console.log('\n✨ You are already logged in.\n');
 }
 
 event.once("login", userInfo);
