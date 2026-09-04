@@ -1,35 +1,24 @@
 const EventEmitter = require('events');
-
 const event = new EventEmitter();
 
-const user = {
-    name: "Sunflower",
-    email: "sunflower@you.com",
-    password: "12345"
-};
-
-const userInput = {
-    email: "sunflower@you.com",
-    password: "12345"
-};
-
-function userInfo({ email, password }) {
-    (email === user.email && password === user.password)
-        ? console.log(`\n🟢 Login successful. Welcome back! ${user.name} 🌻.\n`)
-        : console.log('\n🔴 Login failed: incorrect email or password.\n');
+function one(){
+    console.log("Function - 1");
 }
 
-function alert({ email, password }) {
-    (email !== user.email || password !== user.password)
-        ? console.log('\n❌ Authentication error: please check your credentials and try again.\n')
-        : console.log('\n✨ You are already logged in.\n');
+function two(){
+    console.log("Function - 2");
 }
 
-event.once("login", userInfo);
-event.on("login", alert);
+function three(){
+    console.log("Function - 3\n");
+}
 
-event.emit("login", userInput);
-event.emit("login", userInput);
-event.emit("login", userInput);
-event.emit("login", userInput);
-event.emit("login", userInput);
+event.on("listener_1", one);
+event.on("listener_1", two);
+event.on("listener_1", three);
+
+event.emit("listener_1");
+
+event.removeListener("listener_1", two);
+
+event.emit("listener_1");

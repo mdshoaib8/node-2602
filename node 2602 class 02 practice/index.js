@@ -263,3 +263,17 @@ function callBack() {
 
 const createFolder = FileSystem.mkdir(folderName, callBack);
  */
+
+
+const FileSystem = require("fs");
+const folderName = "one";
+
+function callBack(err) {
+    if(err) {
+        console.log("Error: ", err);
+    } else {
+        console.log("Folder is created successfully!");
+    }
+}
+
+FileSystem.mkdir(folderName, callBack);
