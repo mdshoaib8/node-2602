@@ -2,11 +2,14 @@
 const express = require('express');
 const app = express();
 
+
 // app.js file imports the 'router' folder and uses it as middleware for the app.
 const router = require('./router');
 
 // Importing the 'persons' array from the 'db.js' file.
 const { persons, users } = require('./db');
+
+const jwt = require('jsonwebtoken');
 
 
 // Built-in middleware function in Express. It parses incoming requests with JSON payloads and is based on body-parser. This middleware is available in Express v4.16.0 onwards.
@@ -48,12 +51,17 @@ app.post("/signin", (req, res) => {
     const validUser = users.find(user => (
         user.email === req.body.email
     ));
-    console.log(validUser);
+    // console.log(validUser);
+
+    const token = jwt.sign({ validUser }, 'shoaib');
+    // res.send(token);
+
     if (validUser) {
         if (validUser.password === req.body.password) {
             res.status(200).json({
                 success: true,
-                message: "login is successful"
+                message: "login is successful",
+                token: token
             })
         } else {
             res.status(200).json({
@@ -72,9 +80,19 @@ app.post("/signin", (req, res) => {
 // Request method: GET
 // URL: http://localhost:3000/users
 app.get("/users", (req, res) => {
-    res.status(200).json({
-        success: true,
-        data: users
+
+    jwt.verify(req.headers.token, 'shoaib', (err, decoded) => {
+        if (err) {
+            res.status(401).json({
+                success: false,
+                message: "access denied"
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: users
+            });
+        }
     });
 });
 
