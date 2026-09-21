@@ -1,16 +1,16 @@
 
-
 // program - 1: (Basename)
 /* 
 const path = require('path');
-const fileLocation = 'E:\\OS X\\OS7 File X (S3, D1, D2)\\S1. TO DO\\2. node 2602 class 03 practice\\index.js';
-const fileName = path.basename(fileLocation);
+
+const fileLocation = 'E:\\OS X\OS7 File X (S3, D1, D2)\\S1. TO DO\\2. node 2602 class 03 practice\\index.js';
+const fileName = path.resolve(fileLocation);
 
 console.log("\n", 'Base Name:', fileName, "\n"); 
 
 // Output: Base Name: index.js
- */
 
+ */
 
 
 // program - 2: (Getting Directory Name)
@@ -45,6 +45,7 @@ console.log("\n", 'Resolved Path:', absolutePath, "\n");
 // program - 4: (Joining Path)
 /* 
 const Path = require('path');
+
 const fileDirectory = __dirname;
 const fileName = 'index.js';
 const joinedPath = Path.join(fileDirectory, fileName);
@@ -131,9 +132,9 @@ console.log("\n", 'File Extension:', fileExtension, "\n");
 // Buffer & Stream in Node.js
 /* 
 const fileSystem = require('fs');
+const path = require('path');
 
-const inputFile = fileSystem.createReadStream('myfile.txt', { encoding: 'utf8' });
-
+const inputFile = fileSystem.createReadStream("input.txt", { encoding: 'utf8' });
 const outputFile = fileSystem.createWriteStream('output.txt', { encoding: 'utf8' });
 
 inputFile.pipe(outputFile);
@@ -157,32 +158,30 @@ readStream.pipe(writeStream);
 /* 
 const fileSystem = require('fs');
 
-const fileOne = "fileOne.txt"; // Input file
-const fileTwo = "fileTwo.txt"; // Output file
 const encoding = { encoding: 'utf8' }; // UTF-8 encoding
 const highWaterMark = { highWaterMark: 5 }; // 5 bytes
 
 // Create read and write streams with specified encoding and highWaterMark
-const readStream = fileSystem.createReadStream(fileOne, {
+const inputFile = fileSystem.createReadStream("input.txt", {
     ...encoding, 
     ...highWaterMark
 });
-const writeStream = fileSystem.createWriteStream(fileTwo);
+const outputFile = fileSystem.createWriteStream("output.txt");
 
 // Listen for 'data' event to read chunks of data from the read stream
-readStream.on('data', (chunk) => {
+inputFile.on('data', (chunk) => {
     console.log('Chunk received:', chunk);
-    writeStream.write(chunk); // Write the chunk to the write stream
+    outputFile.write(chunk); // Write the chunk to the write stream
 });
 
 // Listen for 'end' event to know when the read stream has finished
-readStream.on('end', () => {
+inputFile.on('end', () => {
     console.log('Read stream ended.');
-    writeStream.end();
+    outputFile.end();
 });
 
 // Listen for 'finish' event to know when the write stream has finished writing
-writeStream.on('finish', () => {
+outputFile.on('finish', () => {
     console.log('Write stream finished.');
 });
 
