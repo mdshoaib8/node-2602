@@ -1,20 +1,25 @@
+// DATA
 const studentInfo = {
     username: "rahim",
     email: "abc@gmail.com",
     password: 12345
 };
 
+// SCHEMA
 const studentSchema = new mongoose.Schema({
-    name: {
-        type:String,
-        required: true
-    },
-    email: {
-        type:String,
-        required: true
-    },
-    password: {
-        type:Number,
-        required: true
-    },
-})
+    username: String,
+    email: String,
+    password: Number
+});
+
+// Model
+const studentModel = mongoose.model("studentInfo", studentSchema);
+
+// Interact
+studentModel.create();
+studentModel.find();
+studentModel.findById();
+studentModel.findOne();
+studentModel.updateOne();
+studentModel.deleteOne();
+
