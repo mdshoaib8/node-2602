@@ -26,6 +26,7 @@ server.listen(port, () => {
  */
 
 
+
 // program - 2
 /* 
 const http = require('http');
@@ -40,8 +41,8 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     console.log(`Server is running at port: ${port}`);
 })
- */
 
+ */
 
 // program - 3
 /* 
@@ -115,7 +116,7 @@ server.listen(port, () => {
 
 
 // program - 5
-
+/* 
 const http = require('http');
 const port = 2000;
 
@@ -135,4 +136,22 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     console.log(`Server is running at port: ${port}`);
 })
+ */
 
+
+// program - 6
+const http = require('http');
+const port = 2000;
+
+const server = http.createServer((req, res) => {
+    req.on('data', (chunk) => {
+        console.log(chunk.toString());
+    });
+    req.on('end', () => {
+        res.end("Data received successfully.");
+    });
+})
+
+server.listen(port, () => {
+    console.log(`Server is running at port: ${port}`);
+})
